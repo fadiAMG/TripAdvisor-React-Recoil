@@ -10,10 +10,13 @@ import {
 import { Suspense, useState } from "react";
 import SearchResults from "./SearchResults";
 import useStyles from "./styles";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { filterType } from "../../Recoil/Atoms/FilterType";
 
 const SideListing = () => {
   const classes = useStyles();
-  const [locationType, setLocationType] = useState("restaurants");
+  const setLocationType = useSetRecoilState(filterType);
+  const locationType = useRecoilValue(filterType);
   const [locationRating, setLocationRating] = useState("");
 
   return (

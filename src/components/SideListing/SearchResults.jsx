@@ -3,6 +3,7 @@ import { createRef, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { mapBoundries } from "../../Recoil/Atoms/Boundries";
 import { childSelected } from "../../Recoil/Atoms/ChildSelected";
+import { filterType } from "../../Recoil/Atoms/FilterType";
 import { searchResults } from "../../Recoil/Atoms/SearchResults";
 import { currentPlaces } from "../../Recoil/Selectors/PlacesSelector";
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
@@ -12,10 +13,10 @@ const SearchResults = () => {
   // get childSelected element
   const [selected, setSelected] = useRecoilState(childSelected);
 
+  const locationType = useRecoilValue(filterType);
+  const currentBoundries = useRecoilValue(mapBoundries);
   //retrieve all places available from the selector
-  const placesAvailable = useRecoilValue(
-    currentPlaces(useRecoilValue(mapBoundries))
-  );
+  const placesAvailable = useRecoilValue(currentPlaces(currentBoundries));
 
   const setSearchResults = useSetRecoilState(searchResults);
 
@@ -24,11 +25,12 @@ const SearchResults = () => {
   useEffect(() => {
     setSearchResults(placesAvailable);
     setSelected(0);
+    console.log(locationType);
     const refs = Array(placesAvailable.length)
       .fill()
       .map((_, i) => elRefs[i] || createRef());
     setElRefs(refs);
-  }, [placesAvailable, setSearchResults]);
+  }, [placesAvailable, setSearchResults, locationType]);
 
   return (
     <>
