@@ -21,7 +21,7 @@ export const currentPlaces = selectorFamily({
         headers: {
           "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
           "X-RapidAPI-Key":
-            "1f5984df82mshf426006cfc7aa57p105afdjsnee96d20bf24a",
+            "a21d35cbcemsh770cb925ca72f39p150a42jsn835a9e55a28f",
         },
       });
 
