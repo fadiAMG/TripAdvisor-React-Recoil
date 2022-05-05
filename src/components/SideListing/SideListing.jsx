@@ -10,14 +10,15 @@ import {
 import { Suspense, useState } from "react";
 import SearchResults from "./SearchResults";
 import useStyles from "./styles";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
 import { filterType } from "../../Recoil/Atoms/FilterType";
+import { ratingFilter } from "../../Recoil/Atoms/RatingFilter";
 
 const SideListing = () => {
   const classes = useStyles();
   const setLocationType = useSetRecoilState(filterType);
   const locationType = useRecoilValue(filterType);
-  const [locationRating, setLocationRating] = useState("");
+  const [locationRating, setLocationRating] = useRecoilState(ratingFilter);
 
   return (
     <div className={classes.container}>
@@ -42,9 +43,9 @@ const SideListing = () => {
           onChange={(e) => setLocationRating(e.target.value)}
         >
           <MenuItem value={0}>All</MenuItem>
-          <MenuItem value={1}>Above 3.0</MenuItem>
-          <MenuItem value={2}>Above 4.0</MenuItem>
-          <MenuItem value={3}>Abrove 4.5</MenuItem>
+          <MenuItem value={3.0}>Above 3.0</MenuItem>
+          <MenuItem value={4.0}>Above 4.0</MenuItem>
+          <MenuItem value={4.5}>Abrove 4.5</MenuItem>
         </Select>
       </FormControl>
       <Grid container spacing={3} className={classes.list}>

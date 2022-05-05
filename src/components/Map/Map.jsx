@@ -7,6 +7,7 @@ import { childSelected } from "../../Recoil/Atoms/ChildSelected";
 import { searchResults } from "../../Recoil/Atoms/SearchResults";
 import MapMarker from "./MaMarker";
 import useStyles from "./styles";
+import { ratingSelector } from "../../Recoil/Selectors/RatingSelector";
 
 const Map = () => {
   const classes = useStyles();
@@ -25,7 +26,7 @@ const Map = () => {
   // an Atom for search results is created to cache the api call
   // in order not to use suspense with the map component
   //  as it doesn't display items on map correctly
-  const placesAvailable = useRecoilValue(searchResults);
+  const placesAvailable = useRecoilValue(ratingSelector);
 
   //setChildSelected Value in order to scroll into it at SideListing
   const setChildSelected = useSetRecoilState(childSelected);
